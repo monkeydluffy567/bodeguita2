@@ -1,0 +1,123 @@
+img {
+    width: 390px;
+    height: auto;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+div#general {
+    margin: auto;
+    width: auto;
+    height: auto;
+    background-color: white;
+}
+
+div#cont {
+    width: 100%;
+    height: auto;
+    background-color: steelblue;
+}
+
+div#navbar {
+    float: left;
+    margin-top: 20px;
+    width: 25%;
+    height: 800px;
+    background-color: purple;
+    background: #14B76E;
+    color: #fff;
+}
+
+
+/*--------------NAVBAR-----------------*/
+
+.sidebar h2 {
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    background: #2a2a2a;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar li {
+    outline: 1px solid #2a2a2a;
+    transition: all 0.3s;
+    transition-property: border;
+    transition-duration: 0.3;
+}
+
+.sidebar li:hover {
+    background: #444;
+    border-left: 5px solid #eee;
+}
+
+.sidebar a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+}
+
+
+/*------------BODY (informacion)----------*/
+
+div#cuerpo {
+    float: right;
+    width: 75%;
+    height: 550px;
+    margin: auto;
+    margin-top: 20px;
+    /*background-color: seagreen;*/
+}
+
+.informacion {
+    border-collapse: collapse;
+    margin: 0px 20;
+    /*font-size: 0.9em;*/
+    min-width: 400px;
+    /*border-radius: 5px 5px 0 0;*/
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.informacion thead tr {
+    background: #2a2a2a;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.informacion th,
+.informacion td {
+    padding: 12px 20px;
+}
+
+.informacion tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.informacion tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.informacion tbody tr:last-of-type {
+    border-bottom: 2px solid #2a2a2a;
+}
+
+.informacion tbody tr.active-row {
+    font-weight: bold;
+    color: #2a2a2a;
+}
+
+.informacion tbody tr.active-row {
+    font-weight: bold;
+    color: #2a2a2a;
+}
