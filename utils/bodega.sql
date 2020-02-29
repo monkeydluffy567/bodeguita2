@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-02-2020 a las 18:59:58
+-- Tiempo de generación: 29-02-2020 a las 23:33:02
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.1
 
@@ -103,7 +103,7 @@ end if;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_cliente_listar` ()  BEGIN
-SELECT  nombre, apemat,apepat from cliente; 
+SELECT  nombre, apemat,apepat from clientes; 
 
 END$$
 
@@ -311,6 +311,22 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usuario_cambiar_estado` (IN `prm
     WHERE id_usuario = prm_id_usuario;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usuario_cambiar_estado2` (IN `prm_id_usuario` INT)  BEGIN
+declare var_estado boolean;
+set var_estado=(select estado from usuarios where id_usuario=prm_id_usuario);
+if var_estado=0 then
+	update usuarios 
+    set estado=1
+    where id_usuario=prm_id_usuario;
+else
+	update usuarios
+    set estado=0
+    where id_usuario=prm_id_usuario;
+    
+end if;
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usuario_create_update` (IN `prm_id_usuario` INT, IN `prm_email` VARCHAR(250), IN `prm_password` VARCHAR(250), IN `prm_apepat` VARCHAR(100), IN `prm_apemat` VARCHAR(100), IN `prm_nombre` VARCHAR(100), IN `prm_telefono` VARCHAR(25), IN `prm_dni` VARCHAR(8), IN `prm_dirreccion` VARCHAR(100), IN `prm_estado` BOOLEAN, IN `prm_tipo` VARCHAR(45))  BEGIN
 
 DECLARE var_mensaje TEXT;
@@ -410,14 +426,16 @@ select * from usuarios where id_usuario=prm_id_usuario;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usuario_get_password` (IN `prm_email` VARCHAR(100))  BEGIN
-		select  id_usuario ,password from usuarios where email=prm_email;
+		select  id_usuario ,password,estado from usuarios where email=prm_email;
 
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usuario_listar` ()  BEGIN
 
 	select id_usuario ,email,nombre,apepat,apemat,telefono,dni,dirreccion,estado,tipo
-    from usuarios order by id_usuario desc limit 8;
+    from usuarios 
+    
+    order by id_usuario desc limit 8;
     
 END$$
 
@@ -818,7 +836,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `email`, `password`, `apepat`, `apemat`, `nombre`, `telefono`, `dni`, `dirreccion`, `tipo`, `fecha_create`, `update_fecha`, `estado`) VALUES
-(1, 'gchampionbautista@gmail.com', '$2y$12$6nN2eZhcVfZgAuFEVf67MOm2NTcRCpbwKnZOPAZcaihXqtU1fqxBm', 'champi', 'sucso', 'gabriel', '9876543', '72748427', '123', 'administrador', '2020-02-26 11:31:15', '2020-02-27 07:19:17', 1),
+(1, 'gchampionbautista@gmail.com', '$2y$12$6nN2eZhcVfZgAuFEVf67MOm2NTcRCpbwKnZOPAZcaihXqtU1fqxBm', 'champi', 'sucso', 'gabriel', '9876543', '72748427', '123', 'administrador', '2020-02-26 11:31:15', '2020-02-27 07:19:17', 0),
 (2, 'mario_bebecito@gmail.com', '$2y$12$zSG69CftyORjS010JqNz2OkCxaJC5UCKvkApfmIBbqUu5tOmVMkw.', 'torres', 'sucso', 'mario', '66666666', '11111111', 'mi casa', 'dispensador', '2020-02-27 09:29:55', '2020-02-27 09:29:55', 1),
 (3, 'jorgeCurioso@gmail.com', '$2y$12$pLiEbi6ks/lvV61i342EoevV7xc0cgwyA8uFFMDrDg7Vu5Og3cFY2', 'coqueta', 'manrique', 'jorge', '77777777', '8888888', 'angeles', 'cajero', '2020-02-27 09:33:44', '2020-02-27 09:33:44', 1),
 (4, 'camila@gmail.com', '$2y$12$tvGwGBZztjLJHZq3NzTmIOyr/dO8bNosY0/DbsGx.bCqUgzulokPW', 'ibañez', 'nose', 'camila', '66666666', '71696502', 'mi casa', 'especial', '2020-02-27 09:35:40', '2020-02-27 09:35:40', 1),
