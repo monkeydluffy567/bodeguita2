@@ -31,5 +31,11 @@ class facade_vista
         $objeto=new form_abstract_factory($tipo,$estado);
         singleton_pie::getInstance();
     }
+    public function crear_form5($tipo,$privilegios,$data=null,$id=null){
+        singleton_encabezado::getInstance("$tipo");
+        singleton_panel_usuario::getInstance($privilegios);
+        $objeto=new form_abstract_factory($tipo,$data,$id);
+        singleton_pie::getInstance();
+    }
     
 }

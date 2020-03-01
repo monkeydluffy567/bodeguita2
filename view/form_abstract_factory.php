@@ -12,15 +12,17 @@ include_once("form_bienvenida.php");
 include_once("form_usuario_actualizar.php");
 include_once("form_usuario_cambiarContrasenia.php");
 include_once("form_usuario_agregar.php");
+include_once("form_administrador_usuario_actualizar.php");
+include_once("form_administrador_actualizar_privilegios.php");
 class form_abstract_factory{
     private $tipo;
-	public function form_abstract_factory($tipo,$data=null)
+	public function form_abstract_factory($tipo,$data=null,$id=null)
 	{	
 		$this->tipo = $tipo;
-		$this->crearFormulario($data);
+		$this->crearFormulario($data,$id);
 	}
     
-	private  function crearFormulario($data)
+	private  function crearFormulario($data,$id)
     {
         switch($this->tipo) {
             case 'form_login':
@@ -46,7 +48,11 @@ class form_abstract_factory{
             case 'form_usuario_actualizar':
                 return new form_usuario_actualizar($data);
             case 'form_usuario_agregar':
-                return new form_usuario_agregar();   
+                return new form_usuario_agregar();
+            case 'form_administrador_usuario_actualizar' :
+                return new form_administrador_usuario_actualizar($data);
+            case 'form_administrador_actualizar_privilegios':
+                return new form_administrador_actualizar_privilegios($data,$id); 
             default:
                 return new Exception("no exite esta figura");
         }

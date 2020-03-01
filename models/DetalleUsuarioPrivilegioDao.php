@@ -19,5 +19,9 @@ class DetalleUsuarioPrivilegioDao extends AbstractCrud{
 
 		return $data;
     }
+    public function setPrivilegios($id_usuario,$id_privilegio){
+        $this->query="CALL sp_setPrivilegiosForUsuarios($id_usuario,$id_privilegio)";
+        $this->set_query();
+    }
 
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-02-2020 a las 23:33:02
+-- Tiempo de generación: 01-03-2020 a las 17:16:20
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.1
 
@@ -266,6 +266,20 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_proforma_listar` ()  BEGIN
 select * from proformas order by id_proforma limit 10;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_setPrivilegiosForUsuarios` (IN `prm_id_usuario` INT, IN `prm_id_privilegio` INT)  BEGIN
+insert into detalles_usuario_privilegio (
+				id_usuario,
+                id_privilegio,
+                fecha_creacion,
+                estado)values(
+                prm_id_usuario,
+                prm_id_privilegio,
+                now(),
+                1
+                );
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_subtipo_listar` ()  BEGIN
 select * from subtipos;
 
@@ -367,21 +381,25 @@ declare var_id_usuario_max int;
             true
 			);
             set var_id_usuario_max=(select max(id_usuario)from usuarios);
+            insert into detalles_usuario_privilegio(
+                id_usuario,id_privilegio,fecha_creacion,estado)
+                values(var_id_usuario_max,1,now(),1),(var_id_usuario_max,9,now(),1);
+            
             if prm_tipo='dispensador' then
 				insert into detalles_usuario_privilegio(
                 id_usuario,id_privilegio,fecha_creacion,estado)
-                values(var_id_usuario_max,1,now(),1),(var_id_usuario_max,2,now(),1);
+                values(var_id_usuario_max,2,now(),1);
 			end if;
             if prm_tipo='cajero' then
 				insert into detalles_usuario_privilegio(
                 id_usuario,id_privilegio,fecha_creacion,estado)
-                values(var_id_usuario_max,1,now(),1),(var_id_usuario_max,3,now(),1),
+                values(var_id_usuario_max,3,now(),1),
                 (var_id_usuario_max,4,now(),1);
 			end if;
              if prm_tipo='administrador' then
 				insert into detalles_usuario_privilegio(
                 id_usuario,id_privilegio,fecha_creacion,estado)
-                values(var_id_usuario_max,1,now(),1),(var_id_usuario_max,5,now(),1),
+                values(var_id_usuario_max,5,now(),1),
                 (var_id_usuario_max,6,now(),1),(var_id_usuario_max,7,now(),1);
 			end if;
                 
@@ -556,31 +574,48 @@ CREATE TABLE `detalles_usuario_privilegio` (
 
 INSERT INTO `detalles_usuario_privilegio` (`id_usuario`, `id_privilegio`, `fecha_creacion`, `estado`) VALUES
 (1, 1, '2020-02-26 11:31:15', 1),
+(1, 2, '2020-03-01 09:59:35', 1),
 (1, 5, '2020-02-26 11:31:15', 1),
 (1, 6, '2020-02-26 11:31:15', 1),
 (1, 7, '2020-02-26 11:31:15', 1),
+(1, 9, '0000-00-00 00:00:00', 1),
 (2, 1, '2020-02-27 09:29:55', 1),
 (2, 2, '2020-02-27 09:29:55', 1),
+(2, 9, '0000-00-00 00:00:00', 1),
 (3, 1, '2020-02-27 09:33:44', 1),
 (3, 3, '2020-02-27 09:33:44', 1),
 (3, 4, '2020-02-27 09:33:44', 1),
+(3, 9, '0000-00-00 00:00:00', 1),
+(4, 9, '0000-00-00 00:00:00', 1),
 (5, 1, '2020-02-27 09:41:14', 1),
 (5, 3, '2020-02-27 09:41:14', 1),
 (5, 4, '2020-02-27 09:41:14', 1),
+(5, 9, '0000-00-00 00:00:00', 1),
+(6, 9, '0000-00-00 00:00:00', 1),
 (7, 1, '2020-02-27 09:54:08', 1),
 (7, 3, '2020-02-27 09:54:08', 1),
 (7, 4, '2020-02-27 09:54:08', 1),
+(7, 9, '0000-00-00 00:00:00', 1),
 (8, 1, '2020-02-27 10:03:01', 1),
 (8, 5, '2020-02-27 10:03:01', 1),
 (8, 6, '2020-02-27 10:03:01', 1),
 (8, 7, '2020-02-27 10:03:01', 1),
+(8, 9, '0000-00-00 00:00:00', 1),
 (9, 1, '2020-02-27 10:06:41', 1),
 (9, 2, '2020-02-27 10:06:41', 1),
+(9, 9, '0000-00-00 00:00:00', 1),
 (10, 1, '2020-02-27 10:11:07', 1),
 (10, 3, '2020-02-27 10:11:07', 1),
 (10, 4, '2020-02-27 10:11:07', 1),
+(10, 9, '0000-00-00 00:00:00', 1),
 (11, 1, '2020-02-27 10:16:40', 1),
-(11, 2, '2020-02-27 10:16:40', 1);
+(11, 2, '2020-02-27 10:16:40', 1),
+(11, 3, '2020-03-01 10:03:39', 1),
+(11, 4, '2020-03-01 10:03:40', 1),
+(11, 5, '2020-03-01 10:03:40', 1),
+(11, 6, '2020-03-01 10:03:40', 1),
+(11, 7, '2020-03-01 10:03:40', 1),
+(11, 9, '0000-00-00 00:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -631,7 +666,9 @@ INSERT INTO `privilegios` (`id_privilegio`, `nombre`, `descripcion`) VALUES
 (4, 'emitir consolidado de cierre de caja', ''),
 (5, 'gestionar usuarios', ''),
 (6, 'gestionar productos', ''),
-(7, 'reportes', '');
+(7, 'reportes', ''),
+(8, 'salir', NULL),
+(9, 'logout', NULL);
 
 -- --------------------------------------------------------
 
@@ -844,9 +881,9 @@ INSERT INTO `usuarios` (`id_usuario`, `email`, `password`, `apepat`, `apemat`, `
 (6, 'alan_estoy_trabajando@gmail.com', '$2y$12$mdyYgT61AUIejSyo4Vc7UOWmpVllZde6viZFYZTzn0szJxT8H4x2C', 'robles', 'cusipuma', 'alan', '78932145', '00000001', 'villa maria', 'especial', '2020-02-27 09:47:47', '2020-02-27 09:47:47', 1),
 (7, 'yungali@gmail.com', '$2y$12$Ck6mJatwqvC6evINXtDOkugAoqeW8S0Rwui7EV7sI6CyERYuJNesG', 'gutierrez', 'manrique', 'yungali', '78932145', '8888889', 'villa maria', 'cajero', '2020-02-27 09:54:08', '2020-02-27 09:54:08', 1),
 (8, 'papi_dedos_locos_@gmail.com', '$2y$12$43EUinJnK8BKK1YBXHZRd.UNaXqGnTDUuTy1VdZryYDyThOAy.cnu', 'ticona', 'torres', 'rodolfo', '78963254', '36987451', 'san juan', 'administrador', '2020-02-27 10:03:01', '2020-02-27 10:03:01', 1),
-(9, 'jordy_enp@gmail.com', '$2y$12$3HX4StRMJj3ZUNact57AseBoYjMHkrIWwUkO8FLo5KN6SLgj04TCq', 'escobar', 'soto', 'jhordan', '333333333', '99999999', '78945612', 'dispensador', '2020-02-27 10:06:41', '2020-02-27 10:06:41', 1),
+(9, 'jordy_enp@gmail.com', '$2y$12$3HX4StRMJj3ZUNact57AseBoYjMHkrIWwUkO8FLo5KN6SLgj04TCq', 'escobar', 'soto', 'jhordan', '333333333', '99999999', '78945612', 'dispensador', '2020-02-27 10:06:41', '2020-02-27 10:06:41', 0),
 (10, 'david_panda@gmail.com', '$2y$12$dfyCNdW7lwgi/4XmaBEYrOCwlKzNSwqD26G2CZqLvxBfyB7Ig2FXW', 'condorchua', 'caceres', 'david', '78945614', '78945611', 'san juan', 'cajero', '2020-02-27 10:11:07', '2020-02-27 10:11:07', 1),
-(11, 'george_garrison@gmail.com', '$2y$12$M6xJoC/fBUo5k8jTL65MEe04Q8K.D1nnI72blrvHFw73zrY.Yx5W.', 'champi', 'cusipuma', 'george', '78945612', '78945623', 'av roe', 'dispensador', '2020-02-27 10:16:40', '2020-02-27 10:16:40', 1);
+(11, 'george_garrison@gmail.com', '$2y$12$M6xJoC/fBUo5k8jTL65MEe04Q8K.D1nnI72blrvHFw73zrY.Yx5W.', 'champi', 'cusipuma', 'julio', '78945612', '78945623', 'av roe', 'dispensador', '2020-02-27 10:16:40', '2020-03-01 11:11:00', 0);
 
 --
 -- Índices para tablas volcadas
@@ -961,7 +998,7 @@ ALTER TABLE `marcas`
 -- AUTO_INCREMENT de la tabla `privilegios`
 --
 ALTER TABLE `privilegios`
-  MODIFY `id_privilegio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_privilegio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`

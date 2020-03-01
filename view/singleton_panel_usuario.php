@@ -44,7 +44,9 @@ class singleton_panel_usuario
                     <?php if ($privilegio['id_privilegio'] == 7) { ?>
                         <li><a href='../controllers/controller_reporte.php'>Reporte</a></li>
                     <?php }  ?>
-
+                    <?php if ($privilegio['id_privilegio'] == 9) { ?>
+                        <li><a href='../controllers/controller_logout.php'>Logout</a></li>
+                    <?php }  ?>
                    
 
 
