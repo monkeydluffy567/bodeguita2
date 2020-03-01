@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-03-2020 a las 23:27:17
+-- Tiempo de generación: 02-03-2020 a las 00:20:00
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.1
 
@@ -718,17 +718,17 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `id_subtipo`, `nombre`, `precio`, `stock`, `stock_minimo`, `stock_maximo`, `fecha_vencimiento`, `tamaño`, `color`, `url_imagen`, `id_marca`, `id_unidad`) VALUES
-(1, 19, 'arveja', '3.50', NULL, NULL, NULL, '2020-11-30', 'bolsa 500gr', 'verde', NULL, 2, 4),
-(2, 17, 'apio', '0.50', NULL, NULL, NULL, '2020-10-31', 'plastificado 150gr', 'verde', NULL, 2, 4),
-(3, 17, 'lechuga', '1.50', NULL, NULL, NULL, '2020-08-31', 'plastificado 100gr', 'verde', NULL, 1, 4),
-(4, 18, 'mandarina', '2.50', NULL, NULL, NULL, '2020-07-31', 'bolsa 500gr', 'anaranjado', NULL, 1, 4),
-(5, 17, 'manzana', '4.50', NULL, NULL, NULL, '2020-10-20', 'bolsa 500gr', 'rojo', NULL, 1, 4),
-(6, 17, 'naranja', '2.00', NULL, NULL, NULL, '2020-08-31', 'bolsa 500gr', 'anaranjado', NULL, 1, 4),
-(7, 17, 'pera', '3.50', NULL, NULL, NULL, '2020-09-30', 'plastificado 6u', 'verde', NULL, 1, 5),
-(8, 18, 'piña', '4.00', NULL, NULL, NULL, '2020-05-31', 'plastificado 1u', 'amarillo', NULL, 1, 5),
-(9, 17, 'platano', '2.20', NULL, NULL, NULL, '2020-06-27', 'plastificado 5u', 'amarillo', NULL, 1, 5),
-(10, 18, 'sandía', '4.90', NULL, NULL, NULL, '2020-06-20', 'plastificado 1u', 'verde-rojo', NULL, 1, 5),
-(11, 17, 'zanahoria', '1.70', NULL, NULL, NULL, '2020-07-19', 'bolsa 500gr', 'anaranjado', NULL, 2, 4);
+(1, 19, 'alverja', '3.50', 10, 5, 12, '2020-11-30', 'bolsa 500gr', 'verde', 'alverja.png', 2, 4),
+(2, 17, 'apio', '0.50', 10, 5, 12, '2020-10-31', 'plastificado 150gr', 'verde', 'apio.png', 2, 4),
+(3, 17, 'lechuga', '1.50', 10, 5, 12, '2020-08-31', 'plastificado 100gr', 'verde', 'lechuga.png', 1, 4),
+(4, 18, 'mandarina', '2.50', 10, 5, 12, '2020-07-31', 'bolsa 500gr', 'anaranjado', 'mandarina.png', 1, 4),
+(5, 17, 'manzana', '4.50', 10, 5, 12, '2020-10-20', 'bolsa 500gr', 'rojo', 'manzana.png', 1, 4),
+(6, 17, 'naranja', '2.00', 10, 5, 12, '2020-08-31', 'bolsa 500gr', 'anaranjado', 'naranja.png', 1, 4),
+(7, 17, 'pera', '3.50', 10, 5, 12, '2020-09-30', 'plastificado 6u', 'verde', 'pera.png', 1, 5),
+(8, 18, 'piña', '4.00', 10, 5, 12, '2020-05-31', 'plastificado 1u', 'amarillo', 'pina.png', 1, 5),
+(9, 17, 'platano', '2.20', 10, 5, 12, '2020-06-27', 'plastificado 5u', 'amarillo', 'platano.png', 1, 5),
+(10, 18, 'sandia', '4.90', 10, 5, 12, '2020-06-20', 'plastificado 1u', 'verde-rojo', 'sandia.png', 1, 5),
+(11, 17, 'zanahoria', '1.70', 10, 5, 12, '2020-07-19', 'bolsa 500gr', 'anaranjado', 'zanahoria.png', 2, 4);
 
 -- --------------------------------------------------------
 
