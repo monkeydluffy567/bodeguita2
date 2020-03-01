@@ -34,7 +34,7 @@ class form_abstract_factory{
             case 'form_emitir_proforma':
                 return new form_emitir_proforma();       
             case 'form_gestionar_productos':
-                return new form_gestionar_productos();       
+                return new form_gestionar_productos($data);       
             case 'form_gestionar_usuarios':
                 return new form_gestionar_usuarios($data);       
             case 'form_reportes':
