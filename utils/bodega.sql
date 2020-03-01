@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-03-2020 a las 17:16:20
+-- Tiempo de generación: 01-03-2020 a las 18:59:03
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.1
 
@@ -107,6 +107,13 @@ SELECT  nombre, apemat,apepat from clientes;
 
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_deletePrivilegiosForUsuarios` (IN `prm_id_usuario` INT, IN `prm_id_privilegio` INT)  BEGIN
+if prm_id_privilegio>1 and  prm_id_privilegio<9 then
+	DELETE FROM detalles_usuario_privilegio
+	WHERE id_privilegio=prm_id_privilegio and id_usuario=prm_id_usuario;
+end if;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_DetalleProformaProducto_insert` (IN `prm_id_producto` INT, IN `prm_id_proforma` INT, IN `prm_cantidad` INT)  BEGIN
 declare var_precio decimal;
 declare var_subtotal decimal;
@@ -134,8 +141,17 @@ nombre= prm_criterio or marca=prm_criterio or tipo =prm_criterio;
 
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getPrivilegiosAdministrador` (IN `prm_id_usuario` INT)  BEGIN
+select privilegios.id_privilegio,privilegios.nombre
+FROM usuarios
+JOIN detalles_usuario_privilegio ON detalles_usuario_privilegio.id_usuario = usuarios.id_usuario
+JOIN privilegios ON privilegios.id_privilegio = detalles_usuario_privilegio.id_privilegio
+where usuarios.id_usuario = prm_id_usuario;
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_getPrivilegiosForUsuarios` (IN `prm_id_usuario` INT)  BEGIN
-SELECT id_privilegio from detalles_usuario_privilegio
+SELECT * from detalles_usuario_privilegio
+
 where id_usuario=prm_id_usuario;
 END$$
 
@@ -573,8 +589,7 @@ CREATE TABLE `detalles_usuario_privilegio` (
 --
 
 INSERT INTO `detalles_usuario_privilegio` (`id_usuario`, `id_privilegio`, `fecha_creacion`, `estado`) VALUES
-(1, 1, '2020-02-26 11:31:15', 1),
-(1, 2, '2020-03-01 09:59:35', 1),
+(1, 1, '0000-00-00 00:00:00', 1),
 (1, 5, '2020-02-26 11:31:15', 1),
 (1, 6, '2020-02-26 11:31:15', 1),
 (1, 7, '2020-02-26 11:31:15', 1),
@@ -609,9 +624,6 @@ INSERT INTO `detalles_usuario_privilegio` (`id_usuario`, `id_privilegio`, `fecha
 (10, 4, '2020-02-27 10:11:07', 1),
 (10, 9, '0000-00-00 00:00:00', 1),
 (11, 1, '2020-02-27 10:16:40', 1),
-(11, 2, '2020-02-27 10:16:40', 1),
-(11, 3, '2020-03-01 10:03:39', 1),
-(11, 4, '2020-03-01 10:03:40', 1),
 (11, 5, '2020-03-01 10:03:40', 1),
 (11, 6, '2020-03-01 10:03:40', 1),
 (11, 7, '2020-03-01 10:03:40', 1),

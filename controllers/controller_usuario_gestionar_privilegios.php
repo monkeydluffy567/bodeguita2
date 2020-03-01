@@ -14,15 +14,16 @@ if(isset($_SESSION['id_usuario'])){
     if (isset($_GET['id_usuario'])) {
         
         $id = $_GET['id_usuario'];
-        
+        $detalle2=new DetalleUsuarioPrivilegioDao;
+        $data=$detalle2->getPrivilegiosAdmin($id);
        
-        $facade->crear_form3('form_administrador_actualizar_privilegios', $privilegio, $id,$data);
+        $facade->crear_form5('form_administrador_actualizar_privilegios', $privilegio, $data,$id);
 
     }else{
         include_once('../models/UsuarioDao.php');
         $usuarioDao = new UsuarioDao;
         $data = $usuarioDao->read();
-        $facade->crear_form3('form_usuario_actualizar', $privilegio, $data);
+        $facade->crear_form3('form_gestionar_usuarios', $privilegio, $data);
     }
 
 }else{

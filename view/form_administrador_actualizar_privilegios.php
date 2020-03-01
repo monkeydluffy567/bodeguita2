@@ -2,7 +2,7 @@
 include_once 'form_abstract_factory.php';
 class form_administrador_actualizar_privilegios extends form_abstract_factory
 {
-    public function form_administrador_actualizar_privilegios($data,$id)
+    public function form_administrador_actualizar_privilegios($data, $id)
     {
 ?>
         <main class="login-form">
@@ -21,15 +21,14 @@ class form_administrador_actualizar_privilegios extends form_abstract_factory
                                     </thead>
                                     <tbody>
                                         <?php foreach ($data as $k => $v) {
-                                        ?><?php if (!isset($data[$k]['id_usuario'])) {
-                                                    } else { ?>
-                                        <tr>
-                                            <td><?php echo $data[$k]["privilegio"]; ?></td>
-                                        </tr>
-                                <?php
-                                                    }
-                                                }
-                                ?>
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $data[$k]["nombre"]; ?></td>
+                                            </tr>
+                                        <?php
+
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
 
