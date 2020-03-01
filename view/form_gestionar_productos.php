@@ -6,18 +6,18 @@ class form_gestionar_productos extends form_abstract_factory
     {
 ?>
         <!-- Begin page content -->
-        <?php echo var_dump($data)?>
+        
         <div class="container">
             <h3 class="mt-5">gestionar Productos</h3>
             <hr>
-            <form action="controller_gestionar_usuario2.php" method="POST">
+            <form action="controller_gestionar_producto2.php" method="POST">
                 <div class="form-group row">
                     <button type="submit" class="btn btn-primary" name="buscar">
                         buscar
                     </button>
-                    <label class="col-md-4 col-form-label text-md-right">usuario</label>
+                    <label class="col-md-4 col-form-label text-md-right">Producto</label>
                     <div class="col-md-6">
-                        <input type="text" id="email_address" class="form-control" name="usuario">
+                        <input type="text" id="email_address" class="form-control" name="producto">
                     </div>
 
                     <button type="submit" class="btn btn-primary" name="agregar">
@@ -45,7 +45,7 @@ class form_gestionar_productos extends form_abstract_factory
                                     <th scope="col">unidad</th>
                                     <th scope="col">color</th>
                                     <th scope="col">imagen</th>
-
+                                    <th scope="col">actualizar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,9 +67,8 @@ class form_gestionar_productos extends form_abstract_factory
                                     <td><?php echo $data[$k]["tamaño"]; ?></td>
                                     <td><?php echo $data[$k]["unidad"]; ?></td>
                                     <td><?php echo $data[$k]["color"]; ?></td>
-                                    <td><img src="" style="max-width:100%;width:auto;height:auto;"></td>
+                                    <td><img src="/bodeguita2/imagenes_productos/<?php echo $data[$k]["url_imagen"]?>" style="max-width:100%;width:auto;height:auto;"></td>
 
-                                    <td><a href="controller_usuario_delete.php?id_usuario=<?php echo $data[$k]['id_usuario'] ?>" class="btn btn-secondary">cambiar estado</a></td>
                                     <td><a href="controller_usuario_edit.php?id_usuario=<?php echo $data[$k]['id_usuario'] ?>" class="btn btn-primary">actualizar</a></td>
 
 
