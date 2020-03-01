@@ -1,0 +1,13 @@
+insert into producto (id_subtipo,nombre,precio,fecha_vencimiento,tamaño,color,id_marca,id_unidad)
+values
+(19,"arveja",3.5,"2020-11-30",bolsa 500gr",verde,2,4),
+(17,"apio",0.5,"2020-10-31",plastificado 150gr",verde,2,4),
+(17,"lechuga",1.5,"2020-08-31",plastificado 100gr",verde,1,4),
+(18,"mandarina",2.5,"2020-07-31",bolsa 500gr",anaranjado,1,4),
+(17,"manzana",4.5,"2020-10-20",bolsa 500gr",rojo,1,4),
+(17,"naranja",2,"2020-08-31",bolsa 500gr",anaranjado,1,4),
+(17,"pera",3.5,"2020-09-30",plastificado 6u",verde,1,5),
+(18,"piña",4,"2020-05-31",plastificado 1u",amarillo,1,5),
+(17,"platano",2.2,"2020-06-27",plastificado 5u",amarillo,1,5),
+(18,"sandía",4.9,"2020-06-20",plastificado 1u",verde-rojo,1,5),
+(17,"zanahoria",1.7,"2020-07-19",bolsa 500gr",anaranjado,2,4);

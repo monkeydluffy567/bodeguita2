@@ -22,7 +22,7 @@ if (isset($_SESSION['id_usuario'])) {
             $usuarioDao = new UsuarioDao;
             $data = $usuarioDao->read();
             $facade = new facade_vista;
-            $facade->crear_form3("form_gestionar_usuario", $privilegio, $data);
+            $facade->crear_form3("form_gestionar_usuarios", $privilegio, $data);
         }
         if (isset($_POST['quitar'])) {
             foreach ($privilegios_nuevos as $privilegio_nuevo) {
