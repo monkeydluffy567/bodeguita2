@@ -6,7 +6,7 @@ class form_gestionar_productos extends form_abstract_factory
     {
 ?>
         <!-- Begin page content -->
-
+        <?php echo var_dump($data)?>
         <div class="container">
             <h3 class="mt-5">gestionar Productos</h3>
             <hr>
@@ -67,7 +67,7 @@ class form_gestionar_productos extends form_abstract_factory
                                     <td><?php echo $data[$k]["tamaño"]; ?></td>
                                     <td><?php echo $data[$k]["unidad"]; ?></td>
                                     <td><?php echo $data[$k]["color"]; ?></td>
-                                    <td><?php echo $data[$k]["imagen"]; ?></td>
+                                    <td><img src="" style="max-width:100%;width:auto;height:auto;"></td>
 
                                     <td><a href="controller_usuario_delete.php?id_usuario=<?php echo $data[$k]['id_usuario'] ?>" class="btn btn-secondary">cambiar estado</a></td>
                                     <td><a href="controller_usuario_edit.php?id_usuario=<?php echo $data[$k]['id_usuario'] ?>" class="btn btn-primary">actualizar</a></td>

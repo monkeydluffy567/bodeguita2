@@ -5,7 +5,7 @@ class ProductoDao extends AbstractCrud
 {
 
 
-    public function createUpdate(Producto $objeto)
+    public function createUpdate( $objeto)
     {
 
         $id_producto = $objeto->getId_producto();

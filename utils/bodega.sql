@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-03-2020 a las 18:59:03
+-- Tiempo de generación: 01-03-2020 a las 23:27:17
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.1
 
@@ -251,7 +251,12 @@ end if;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_producto_listar` ()  BEGIN
-select * from productos order by id_producto limit 10;
+select productos.id_producto, productos.nombre,marcas.marca,subtipos.nombre as subtipo,productos.precio,productos.stock,productos.tamaño,unidades.unidad,productos.color,productos.url_imagen 
+from productos
+join subtipos on productos.id_subtipo=subtipos.id_subtipo
+join marcas on productos.id_marca=marcas.id_marca
+join unidades on productos.id_unidad =unidades.id_unidad
+order by id_producto desc;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_proforma_buscar` (IN `prm_id_proforma` INT)  BEGIN
@@ -469,7 +474,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_usuario_listar` ()  BEGIN
 	select id_usuario ,email,nombre,apepat,apemat,telefono,dni,dirreccion,estado,tipo
     from usuarios 
     
-    order by id_usuario desc limit 8;
+    order by id_usuario desc ;
     
 END$$
 
@@ -612,6 +617,9 @@ INSERT INTO `detalles_usuario_privilegio` (`id_usuario`, `id_privilegio`, `fecha
 (7, 4, '2020-02-27 09:54:08', 1),
 (7, 9, '0000-00-00 00:00:00', 1),
 (8, 1, '2020-02-27 10:03:01', 1),
+(8, 2, '2020-03-01 13:55:27', 1),
+(8, 3, '2020-03-01 13:55:27', 1),
+(8, 4, '2020-03-01 13:55:27', 1),
 (8, 5, '2020-02-27 10:03:01', 1),
 (8, 6, '2020-02-27 10:03:01', 1),
 (8, 7, '2020-02-27 10:03:01', 1),
@@ -624,6 +632,7 @@ INSERT INTO `detalles_usuario_privilegio` (`id_usuario`, `id_privilegio`, `fecha
 (10, 4, '2020-02-27 10:11:07', 1),
 (10, 9, '0000-00-00 00:00:00', 1),
 (11, 1, '2020-02-27 10:16:40', 1),
+(11, 2, '2020-03-01 13:22:58', 1),
 (11, 5, '2020-03-01 10:03:40', 1),
 (11, 6, '2020-03-01 10:03:40', 1),
 (11, 7, '2020-03-01 10:03:40', 1),
@@ -692,7 +701,7 @@ CREATE TABLE `productos` (
   `id_producto` int(11) NOT NULL,
   `id_subtipo` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `precio` decimal(2,0) NOT NULL,
+  `precio` decimal(11,2) NOT NULL,
   `stock` int(11) DEFAULT NULL,
   `stock_minimo` int(11) DEFAULT NULL,
   `stock_maximo` int(11) DEFAULT NULL,
@@ -703,6 +712,23 @@ CREATE TABLE `productos` (
   `id_marca` int(11) DEFAULT NULL,
   `id_unidad` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id_producto`, `id_subtipo`, `nombre`, `precio`, `stock`, `stock_minimo`, `stock_maximo`, `fecha_vencimiento`, `tamaño`, `color`, `url_imagen`, `id_marca`, `id_unidad`) VALUES
+(1, 19, 'arveja', '3.50', NULL, NULL, NULL, '2020-11-30', 'bolsa 500gr', 'verde', NULL, 2, 4),
+(2, 17, 'apio', '0.50', NULL, NULL, NULL, '2020-10-31', 'plastificado 150gr', 'verde', NULL, 2, 4),
+(3, 17, 'lechuga', '1.50', NULL, NULL, NULL, '2020-08-31', 'plastificado 100gr', 'verde', NULL, 1, 4),
+(4, 18, 'mandarina', '2.50', NULL, NULL, NULL, '2020-07-31', 'bolsa 500gr', 'anaranjado', NULL, 1, 4),
+(5, 17, 'manzana', '4.50', NULL, NULL, NULL, '2020-10-20', 'bolsa 500gr', 'rojo', NULL, 1, 4),
+(6, 17, 'naranja', '2.00', NULL, NULL, NULL, '2020-08-31', 'bolsa 500gr', 'anaranjado', NULL, 1, 4),
+(7, 17, 'pera', '3.50', NULL, NULL, NULL, '2020-09-30', 'plastificado 6u', 'verde', NULL, 1, 5),
+(8, 18, 'piña', '4.00', NULL, NULL, NULL, '2020-05-31', 'plastificado 1u', 'amarillo', NULL, 1, 5),
+(9, 17, 'platano', '2.20', NULL, NULL, NULL, '2020-06-27', 'plastificado 5u', 'amarillo', NULL, 1, 5),
+(10, 18, 'sandía', '4.90', NULL, NULL, NULL, '2020-06-20', 'plastificado 1u', 'verde-rojo', NULL, 1, 5),
+(11, 17, 'zanahoria', '1.70', NULL, NULL, NULL, '2020-07-19', 'bolsa 500gr', 'anaranjado', NULL, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -892,10 +918,10 @@ INSERT INTO `usuarios` (`id_usuario`, `email`, `password`, `apepat`, `apemat`, `
 (5, 'coronado_hago_todo@gmail.com', '$2y$12$RzcIcgDXZa1rQtzROuhtCeDOQ/Ws4b9gbEkSb977H0gtbn44aCSf6', 'missgarbage', 'nose', 'coronado', '78945612', '78945613', 'nose', 'cajero', '2020-02-27 09:41:14', '2020-02-27 09:41:14', 1),
 (6, 'alan_estoy_trabajando@gmail.com', '$2y$12$mdyYgT61AUIejSyo4Vc7UOWmpVllZde6viZFYZTzn0szJxT8H4x2C', 'robles', 'cusipuma', 'alan', '78932145', '00000001', 'villa maria', 'especial', '2020-02-27 09:47:47', '2020-02-27 09:47:47', 1),
 (7, 'yungali@gmail.com', '$2y$12$Ck6mJatwqvC6evINXtDOkugAoqeW8S0Rwui7EV7sI6CyERYuJNesG', 'gutierrez', 'manrique', 'yungali', '78932145', '8888889', 'villa maria', 'cajero', '2020-02-27 09:54:08', '2020-02-27 09:54:08', 1),
-(8, 'papi_dedos_locos_@gmail.com', '$2y$12$43EUinJnK8BKK1YBXHZRd.UNaXqGnTDUuTy1VdZryYDyThOAy.cnu', 'ticona', 'torres', 'rodolfo', '78963254', '36987451', 'san juan', 'administrador', '2020-02-27 10:03:01', '2020-02-27 10:03:01', 1),
+(8, 'papi_dedos_locos_@gmail.com', '$2y$12$43EUinJnK8BKK1YBXHZRd.UNaXqGnTDUuTy1VdZryYDyThOAy.cnu', 'ticona', 'torres', 'rodolfo', '78963254', '36987451', 'san juano', 'administrador', '2020-02-27 10:03:01', '2020-03-01 16:09:22', 1),
 (9, 'jordy_enp@gmail.com', '$2y$12$3HX4StRMJj3ZUNact57AseBoYjMHkrIWwUkO8FLo5KN6SLgj04TCq', 'escobar', 'soto', 'jhordan', '333333333', '99999999', '78945612', 'dispensador', '2020-02-27 10:06:41', '2020-02-27 10:06:41', 0),
 (10, 'david_panda@gmail.com', '$2y$12$dfyCNdW7lwgi/4XmaBEYrOCwlKzNSwqD26G2CZqLvxBfyB7Ig2FXW', 'condorchua', 'caceres', 'david', '78945614', '78945611', 'san juan', 'cajero', '2020-02-27 10:11:07', '2020-02-27 10:11:07', 1),
-(11, 'george_garrison@gmail.com', '$2y$12$M6xJoC/fBUo5k8jTL65MEe04Q8K.D1nnI72blrvHFw73zrY.Yx5W.', 'champi', 'cusipuma', 'julio', '78945612', '78945623', 'av roe', 'dispensador', '2020-02-27 10:16:40', '2020-03-01 11:11:00', 0);
+(11, 'george_garrison@gmail.com', '$2y$12$M6xJoC/fBUo5k8jTL65MEe04Q8K.D1nnI72blrvHFw73zrY.Yx5W.', 'champi', 'cusipuma', 'julio', '78945612', '78945623', 'av roe', 'dispensador', '2020-02-27 10:16:40', '2020-03-01 13:26:27', 1);
 
 --
 -- Índices para tablas volcadas
@@ -1016,7 +1042,7 @@ ALTER TABLE `privilegios`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `proformas`
