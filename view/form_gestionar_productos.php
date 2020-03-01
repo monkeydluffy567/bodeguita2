@@ -64,8 +64,9 @@ class form_gestionar_productos extends form_abstract_factory
                                     <td><?php echo $data[$k]["subtipo"]; ?></td>
                                     <td><?php echo $data[$k]["precio"]; ?></td>
                                     <td><?php echo $data[$k]["stock"]; ?></td>
-                                    <td><?php echo $data[$k]["unidad"]; ?></td>
                                     <td><?php echo $data[$k]["tamaño"]; ?></td>
+                                    <td><?php echo $data[$k]["unidad"]; ?></td>
+                                    <td><?php echo $data[$k]["color"]; ?></td>
                                     <td><?php echo $data[$k]["imagen"]; ?></td>
 
                                     <td><a href="controller_usuario_delete.php?id_usuario=<?php echo $data[$k]['id_usuario'] ?>" class="btn btn-secondary">cambiar estado</a></td>

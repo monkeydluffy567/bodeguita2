@@ -7,6 +7,7 @@ if (isset($_SESSION['id_usuario'])) {
     include_once('../models/DetalleUsuarioPrivilegioDao.php');
     $detalle = new DetalleUsuarioPrivilegioDao;
     $privilegio = $detalle->getPrivilegios($id_usuario);
+    
     include_once("../models/ProductoDao.php");
     $ProductoDao=new ProductoDao;
     $data=$ProductoDao->read();
