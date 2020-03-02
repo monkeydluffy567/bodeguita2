@@ -46,7 +46,7 @@ class ProductoDao extends AbstractCrud
     {
     }
     public function buscarProducto($criterio){
-        $this->query="CALL sp_producto_buscar($criterio)";
+        $this->query="CALL sp_findproducto('$criterio')";
         $this->get_query();
         $data=array();
         foreach ($this->rows as $key => $value) {
@@ -54,5 +54,9 @@ class ProductoDao extends AbstractCrud
         }
 
         return $data;
+    }
+    public function agregarProducto($nombre,$precio,$stock,$fecha_nacimiento,$tamanio,$color,$subtipo,$marca,$unidad){
+        $this->query="CALL sp_producto_agregar('$nombre',$precio,$stock,'$fecha_nacimiento',$tamanio,'$color','$subtipo','$marca','$unidad')";
+        $this->set_query();
     }
 }

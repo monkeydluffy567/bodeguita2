@@ -14,6 +14,7 @@ include_once("form_usuario_cambiarContrasenia.php");
 include_once("form_usuario_agregar.php");
 include_once("form_administrador_usuario_actualizar.php");
 include_once("form_administrador_actualizar_privilegios.php");
+include_once("form_producto_agregar.php");
 class form_abstract_factory{
     private $tipo;
 	public function form_abstract_factory($tipo,$data=null,$id=null)
@@ -52,7 +53,9 @@ class form_abstract_factory{
             case 'form_administrador_usuario_actualizar' :
                 return new form_administrador_usuario_actualizar($data);
             case 'form_administrador_actualizar_privilegios':
-                return new form_administrador_actualizar_privilegios($data,$id); 
+                return new form_administrador_actualizar_privilegios($data,$id);
+            case 'form_producto_agregar':
+                return new form_producto_agregar(); 
             default:
                 return new Exception("no exite esta figura");
         }
