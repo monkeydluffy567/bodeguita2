@@ -37,9 +37,7 @@ class form_usuario_cambiarContrasenia extends form_abstract_factory{
                                         <button type="submit" class="btn btn-primary" name="ok">
                                             ok
                                         </button>
-                                        <button type="submit" class="btn btn-primary" name="cancelar">
-                                            cancelar
-                                        </button>
+                                        <button type="button" class="btn btn-danger" name="cancelar"><a href="./controller_usuario.php">cancelar</a></button>
                                     </div>
                             </div>
                             </form>

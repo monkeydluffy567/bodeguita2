@@ -55,9 +55,7 @@ class form_administrador_usuario_actualizar extends form_abstract_factory
                                         <button type="submit" class="btn btn-primary" name="actualizar">
                                             actualizar
                                         </button>
-                                        <button type="submit" class="btn btn-primary" name="cancelar">
-                                            cancelar
-                                        </button>
+                                        <button type="button" class="btn btn-danger" name="cancelar"><a href="./controller_gestionar_usuario.php">cancelar</a></button>
                                         
                                     </div>
                             </div>

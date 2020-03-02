@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-03-2020 a las 06:10:29
+-- Tiempo de generación: 02-03-2020 a las 16:23:58
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.1
 
@@ -197,7 +197,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_privilegio_listar` ()  BEGIN
     
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_producto_agregar` (IN `prm_nombre` VARCHAR(100), IN `prm_precio` DECIMAL(10,2), IN `prm_stock` INT, IN `prm_fecha_nacimiento` TEXT, IN `prm_tamaño` DECIMAL(10,2), IN `prm_color` VARCHAR(40), IN `prm_subtipo` TEXT, IN `prm_marca` TEXT, IN `prm_unidad` TEXT)  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_producto_agregar` (IN `prm_nombre` VARCHAR(100), IN `prm_precio` DECIMAL(10,2), IN `prm_stock` INT, IN `prm_fecha_vencimiento` TEXT, IN `prm_tamaño` DECIMAL(10,2), IN `prm_color` VARCHAR(40), IN `prm_subtipo` TEXT, IN `prm_marca` TEXT, IN `prm_unidad` TEXT)  BEGIN
 declare var_id_marca int;
 declare var_id_subtipo int;
 declare var_id_unidad int;
@@ -668,11 +668,18 @@ INSERT INTO `detalles_usuario_privilegio` (`id_usuario`, `id_privilegio`, `fecha
 (10, 4, '2020-02-27 10:11:07', 1),
 (10, 9, '0000-00-00 00:00:00', 1),
 (11, 1, '2020-02-27 10:16:40', 1),
-(11, 2, '2020-03-01 13:22:58', 1),
 (11, 5, '2020-03-01 10:03:40', 1),
 (11, 6, '2020-03-01 10:03:40', 1),
 (11, 7, '2020-03-01 10:03:40', 1),
-(11, 9, '0000-00-00 00:00:00', 1);
+(11, 9, '0000-00-00 00:00:00', 1),
+(12, 1, '2020-03-02 08:56:22', 1),
+(12, 2, '2020-03-02 08:56:22', 1),
+(12, 9, '2020-03-02 08:56:22', 1),
+(14, 1, '2020-03-02 09:34:56', 1),
+(14, 2, '2020-03-02 09:50:45', 1),
+(14, 3, '2020-03-02 09:50:45', 1),
+(14, 4, '2020-03-02 09:50:45', 1),
+(14, 9, '2020-03-02 09:34:56', 1);
 
 -- --------------------------------------------------------
 
@@ -764,7 +771,9 @@ INSERT INTO `productos` (`id_producto`, `id_subtipo`, `nombre`, `precio`, `stock
 (8, 18, 'piña', '4.00', 10, 5, 12, '2020-05-31', 'plastificado 1u', 'amarillo', 'pina.png', 1, 5),
 (9, 17, 'platano', '2.20', 10, 5, 12, '2020-06-27', 'plastificado 5u', 'amarillo', 'platano.png', 1, 5),
 (10, 18, 'sandia', '4.90', 10, 5, 12, '2020-06-20', 'plastificado 1u', 'verde-rojo', 'sandia.png', 1, 5),
-(11, 17, 'zanahoria', '1.70', 10, 5, 12, '2020-07-19', 'bolsa 500gr', 'anaranjado', 'zanahoria.png', 2, 4);
+(11, 17, 'zanahoria', '1.70', 10, 5, 12, '2020-07-19', 'bolsa 500gr', 'anaranjado', 'zanahoria.png', 2, 4),
+(12, 26, 'leche', '3.20', 10, 5, 12, '2021-02-11', '235.00', 'azul', 'leche.png', 7, 2),
+(18, 26, 'leche', '3.20', 10, 5, 12, '2020-03-28', '235.00', 'rojo', 'leche.png', 7, 2);
 
 -- --------------------------------------------------------
 
@@ -949,15 +958,17 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id_usuario`, `email`, `password`, `apepat`, `apemat`, `nombre`, `telefono`, `dni`, `dirreccion`, `tipo`, `fecha_create`, `update_fecha`, `estado`) VALUES
 (1, 'gchampionbautista@gmail.com', '$2y$12$6nN2eZhcVfZgAuFEVf67MOm2NTcRCpbwKnZOPAZcaihXqtU1fqxBm', 'champi', 'sucso', 'gabriel', '9876543', '72748427', '123', 'administrador', '2020-02-26 11:31:15', '2020-02-27 07:19:17', 0),
 (2, 'mario_bebecito@gmail.com', '$2y$12$zSG69CftyORjS010JqNz2OkCxaJC5UCKvkApfmIBbqUu5tOmVMkw.', 'torres', 'sucso', 'mario', '66666666', '11111111', 'mi casa', 'dispensador', '2020-02-27 09:29:55', '2020-02-27 09:29:55', 1),
-(3, 'jorgeCurioso@gmail.com', '$2y$12$pLiEbi6ks/lvV61i342EoevV7xc0cgwyA8uFFMDrDg7Vu5Og3cFY2', 'coqueta', 'manrique', 'jorge', '77777777', '8888888', 'angeles', 'cajero', '2020-02-27 09:33:44', '2020-02-27 09:33:44', 1),
+(3, 'jorgeCurioso@gmail.com', '$2y$12$pLiEbi6ks/lvV61i342EoevV7xc0cgwyA8uFFMDrDg7Vu5Og3cFY2', 'coqueta', 'manrique', 'jorge', '77777777', '8888888', 'angeles', 'cajero', '2020-02-27 09:33:44', '2020-03-02 08:33:08', 0),
 (4, 'camila@gmail.com', '$2y$12$tvGwGBZztjLJHZq3NzTmIOyr/dO8bNosY0/DbsGx.bCqUgzulokPW', 'ibañez', 'nose', 'camila', '66666666', '71696502', 'mi casa', 'especial', '2020-02-27 09:35:40', '2020-02-27 09:35:40', 1),
 (5, 'coronado_hago_todo@gmail.com', '$2y$12$RzcIcgDXZa1rQtzROuhtCeDOQ/Ws4b9gbEkSb977H0gtbn44aCSf6', 'missgarbage', 'nose', 'coronado', '78945612', '78945613', 'nose', 'cajero', '2020-02-27 09:41:14', '2020-02-27 09:41:14', 1),
 (6, 'alan_estoy_trabajando@gmail.com', '$2y$12$mdyYgT61AUIejSyo4Vc7UOWmpVllZde6viZFYZTzn0szJxT8H4x2C', 'robles', 'cusipuma', 'alan', '78932145', '00000001', 'villa maria', 'especial', '2020-02-27 09:47:47', '2020-02-27 09:47:47', 1),
 (7, 'yungali@gmail.com', '$2y$12$Ck6mJatwqvC6evINXtDOkugAoqeW8S0Rwui7EV7sI6CyERYuJNesG', 'gutierrez', 'manrique', 'yungali', '78932145', '8888889', 'villa maria', 'cajero', '2020-02-27 09:54:08', '2020-02-27 09:54:08', 1),
-(8, 'papi_dedos_locos_@gmail.com', '$2y$12$43EUinJnK8BKK1YBXHZRd.UNaXqGnTDUuTy1VdZryYDyThOAy.cnu', 'ticona', 'torres', 'rodolfo', '78963254', '36987451', 'san juano', 'administrador', '2020-02-27 10:03:01', '2020-03-01 16:09:22', 1),
+(8, 'papi_dedos_locos_@gmail.com', '$2y$12$43EUinJnK8BKK1YBXHZRd.UNaXqGnTDUuTy1VdZryYDyThOAy.cnu', 'ticona', 'torres', 'rodolfo', '78963254', '36987451', 'san juano', 'administrador', '2020-02-27 10:03:01', '2020-03-02 09:28:12', 0),
 (9, 'jordy_enp@gmail.com', '$2y$12$3HX4StRMJj3ZUNact57AseBoYjMHkrIWwUkO8FLo5KN6SLgj04TCq', 'escobar', 'soto', 'jhordan', '333333333', '99999999', '78945612', 'dispensador', '2020-02-27 10:06:41', '2020-02-27 10:06:41', 0),
 (10, 'david_panda@gmail.com', '$2y$12$dfyCNdW7lwgi/4XmaBEYrOCwlKzNSwqD26G2CZqLvxBfyB7Ig2FXW', 'condorchua', 'caceres', 'david', '78945614', '78945611', 'san juan', 'cajero', '2020-02-27 10:11:07', '2020-02-27 10:11:07', 1),
-(11, 'george_garrison@gmail.com', '$2y$12$M6xJoC/fBUo5k8jTL65MEe04Q8K.D1nnI72blrvHFw73zrY.Yx5W.', 'champi', 'cusipuma', 'julio', '78945612', '78945623', 'av roe', 'dispensador', '2020-02-27 10:16:40', '2020-03-01 13:26:27', 1);
+(11, 'george_garrison@gmail.com', '$2y$12$M6xJoC/fBUo5k8jTL65MEe04Q8K.D1nnI72blrvHFw73zrY.Yx5W.', 'champi', 'cusipuma', 'julio', '78945612', '78945623', 'av roe', 'dispensador', '2020-02-27 10:16:40', '2020-03-01 13:26:27', 1),
+(12, 'gtaisut@gmail.com', '$2y$12$zTdkYoLZJTAIWusyAGsgaeh9pxffrABFJ/L4Yu3YP2I5Wbm97txcO', 'champi', 'bautista', 'taisut', '9876543', '78965436', 'villa el salvador', 'dispensador', '2020-03-02 08:56:22', '2020-03-02 09:18:26', 1),
+(14, 'taisut@gmail.com', '$2y$12$ok.AP/.CRKqo7j.C5FsN8uAlneEHpHlPc60QscUGoxMcvTwsLdMFC', 'torres', 'manrique', 'taisut', '987654323', '96325841', 'san juan', 'especial', '2020-03-02 09:34:56', '2020-03-02 09:55:05', 1);
 
 --
 -- Índices para tablas volcadas
@@ -1078,7 +1089,7 @@ ALTER TABLE `privilegios`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `proformas`
@@ -1108,7 +1119,7 @@ ALTER TABLE `unidades`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas

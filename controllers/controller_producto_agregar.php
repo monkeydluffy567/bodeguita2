@@ -19,27 +19,26 @@ if (isset($_SESSION['id_usuario'])) {
         include_once('../models/ProductoDao.php');
         
         $productoDao=new ProductoDao;
-        $productoDao->agregarProducto($_POST['nombre'],$_POST['precio'],$_POST['stock'],$_POST['fecha_nacimiento'],$_POST['tamaño'],$_POST['color'],$_POST['subtipo'],$_POST['marca'],$_POST['unidad']);
+        $nombre=$_POST['nombre'];
+        $precio=$_POST['precio'];
+        $stock=$_POST['stock'];
+        $fecha_nacimiento=$_POST['fecha_nacimiento'];
+        $tamanio=$_POST['tamaño'];
+        $color=$_POST['color'];
+        $subtipo=$_POST['subtipo'];
+        $marca=$_POST['marca'];
+        $unidad=$_POST['unidad'];
+        $productoDao->agregarProducto($nombre,$precio,$stock,$fecha_nacimiento,$tamanio,$color,$subtipo,$marca,$unidad);
         include_once('../models/ProductoDao.php');
         $productoDao2=new ProductoDao;
         $data=$productoDao2->read();
-        $facade->crear_form3('form_gestionar_productos', $privilegio,$data);
+        
+        print('<script languaje="JavaScript">alert("producto agregado");</script>');
+        print('<a href="./controller_gestionar_producto.php">volver</a>');
          
         
         
-    } else if (isset($_POST['cancelar'])) {
-        include_once('../models/DetalleUsuarioPrivilegioDao.php');
-        $detalle = new DetalleUsuarioPrivilegioDao;
-        $privilegio = $detalle->getPrivilegios($id_usuario);
-        
-        include_once('../view/facade_vista.php');
-        $facade = new facade_vista();
-
-        include_once('../models/ProductoDao.php');
-        $productoDao=new ProductoDao;
-        $data=$productoDao->read();
-        $facade->crear_form3('form_gestionar_productos', $privilegio,$data);
-    }
+    } 
 } else {
     print('<script languaje="JavaScript">alert("Acceso Denegado");</script>');
     print('<a href="../index.php">volver</a>');

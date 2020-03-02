@@ -24,13 +24,6 @@ if (isset($_SESSION['id_usuario'])) {
         }
 
 
-    }else if(isset($_POST['cancelar'])){
-        include_once('../models/DetalleUsuarioPrivilegioDao.php');
-        $detalle = new DetalleUsuarioPrivilegioDao;
-        $privilegio = $detalle->getPrivilegios($id_usuario);
-        include_once('../view/facade_vista.php');
-        $facade = new facade_vista();
-        $facade->crear_form2('form_bienvenida', $privilegio);
     }
     
 

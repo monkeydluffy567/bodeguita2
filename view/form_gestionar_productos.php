@@ -45,7 +45,7 @@ class form_gestionar_productos extends form_abstract_factory
                                     <th scope="col">unidad</th>
                                     <th scope="col">color</th>
                                     <th scope="col">imagen</th>
-                                    <th scope="col">actualizar</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -69,7 +69,7 @@ class form_gestionar_productos extends form_abstract_factory
                                     <td><?php echo $data[$k]["color"]; ?></td>
                                     <td><img src="/bodeguita2/imagenes_productos/<?php echo $data[$k]["url_imagen"]?>" style="max-width:100%;width:auto;height:auto;"></td>
 
-                                    <td><a href="controller_usuario_edit.php?id_usuario=<?php echo $data[$k]['id_usuario'] ?>" class="btn btn-primary">actualizar</a></td>
+                                 
 
 
                                 </tr>

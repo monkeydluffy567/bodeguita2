@@ -18,38 +18,38 @@ class form_producto_agregar extends form_abstract_factory
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label text-md-right">nombre</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" name="nombre" >
+                                            <input type="text" class="form-control" name="nombre" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label text-md-right">precio</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" name="precio" >
+                                            <input type="text" class="form-control" name="precio" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label text-md-right">stock</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" name="stock" >
+                                            <input type="text" class="form-control" name="stock" required>
                                         </div>
                                     </div>
                                     
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label text-md-right">fecha vencimiento</label>
                                         <div class="col-md-6">
-                                            <input type="date" class="form-control" name="fecha_nacimiento" >
+                                            <input type="date" class="form-control" name="fecha_nacimiento" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label text-md-right">tamaño</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" name="tamaño" >
+                                            <input type="text" class="form-control" name="tamaño" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label text-md-right">color</label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" name="color" >
+                                            <input type="text" class="form-control" name="color" required>
                                         </div>
                                     </div>
 
@@ -57,7 +57,7 @@ class form_producto_agregar extends form_abstract_factory
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label text-md-right">subtipo</label>
                                         <div class="col-md-6">
-                                            <select name="subtipo" size="10">
+                                            <select name="subtipo" size="10" required>
 
                                                 <option> Aceites</option>
                                                 <option>Arroz</option>
@@ -133,7 +133,7 @@ class form_producto_agregar extends form_abstract_factory
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label text-md-right">marcas</label>
                                         <div class="col-md-6">
-                                            <select name="marca" size="5">
+                                            <select name="marca" size="5" required>
                                                 <option>ADES</option>
                                                 <option>Almendrina</option>
                                                 <option>Anchor</option>
@@ -148,7 +148,7 @@ class form_producto_agregar extends form_abstract_factory
                                     <div class="form-group row">
                                         <label class="col-md-4 col-form-label text-md-right">unidades</label>
                                         <div class="col-md-6">
-                                            <select name="unidad" size="2">
+                                            <select name="unidad" size="2" required>
                                                 <option>l</option>
                                                 <option>ml</option>
                                                 <option>kgr</option>
@@ -161,9 +161,8 @@ class form_producto_agregar extends form_abstract_factory
                                         <button type="submit" class="btn btn-primary" name="agregar">
                                             agregar
                                         </button>
-                                        <button type="submit" class="btn btn-primary" name="cancelar">
-                                            cancelar
-                                        </button>
+                                        <button type="button" class="btn btn-danger" name="cancelar"><a href="./controller_gestionar_producto.php">cancelar</a></button>
+
 
                                     </div>
                             </div>
